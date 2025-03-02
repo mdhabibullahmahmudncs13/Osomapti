@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osomapti - Your Gateway to Educational Growth</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --accent: #f43f5e;
+            --accent-light: #fb7185;
+            --yellow: #facc15;
+            --purple: #a855f7;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Moving Gradient Animation */
+        @keyframes gradient-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* Header with Moving Gradient */
+        header {
+            background: linear-gradient(-45deg, 
+                var(--primary), 
+                var(--primary-dark), 
+                var(--purple), 
+                var(--secondary));
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .logo span {
+            color: var(--yellow);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--yellow);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .btn {
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(244, 63, 94, 0.4);
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(244, 63, 94, 0.5);
+        }
+        
+        /* Hero Section with Moving Gradient */
+        .hero {
+            min-height: 600px;
+            padding: 80px 0;
+            background: url('/api/placeholder/1200/600') center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, 
+                var(--primary), 
+                var(--primary-dark), 
+                var(--purple), 
+                var(--accent));
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+            z-index: 1;
+            opacity: 0.9;
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 56px;
+            margin-bottom: 25px;
+            color: white;
+            line-height: 1.2;
+            font-weight: 800;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease-out 0.2s;
+            animation-fill-mode: both;
+        }
+        
+        .hero-btn {
+            animation: fadeInUp 1s ease-out 0.4s;
+            animation-fill-mode: both;
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(5px 5px 15px rgba(0,0,0,0.3));
+        }
+        
+        .wave-separator {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            z-index: 2;
+            transform: rotate(180deg);
+        }
+        
+        .wave-separator svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 70px;
+        }
+        
+        .wave-separator .shape-fill {
+            fill: #FFFFFF;
+        }
+        
+        .features {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .features:before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light), var(--purple));
+            opacity: 0.1;
+            top: -150px;
+            left: -150px;
+            z-index: -1;
+        }
+        
+        .features:after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary), var(--yellow));
+            opacity: 0.1;
+            bottom: -150px;
+            right: -150px;
+            z-index: -1;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 30px;
+            color: var(--primary-dark);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+        
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to right, var(--primary), var(--purple));
+            transition: height 0.4s ease;
+            z-index: -1;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-15px);
+        }
+        
+        .feature-card:hover:before {
+            height: 100%;
+            opacity: 0.05;
+        }
+        
+        .feature-icon {
+            font-size: 50px;
+            margin-bottom: 25px;
+            display: inline-block;
+            padding: 20px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+        }
+        
+        .feature-card:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(250, 204, 21, 0.1));
+        }
+        
+        .feature-card:nth-child(3) .feature-icon {
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.1), rgba(251, 113, 133, 0.1));
+        }
+        
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+        
+        .courses {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(168, 85, 247, 0.05));
+        }
+        
+        .course-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .course-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .course-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .course-card:hover .course-img img {
+            transform: scale(1.1);
+        }
+        
+        .course-content {
+            padding: 25px;
+        }
+        
+        .course-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        
+        .course-card:nth-child(1) .course-tag {
+            background-color: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+        }
+        
+        .course-card:nth-child(2) .course-tag {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--secondary);
+        }
+        
+        .course-card:nth-child(3) .course-tag {
+            background-color: rgba(244, 63, 94, 0.1);
+            color: var(--accent);
+        }
+        
+        .course-card:nth-child(4) .course-tag {
+            background-color: rgba(250, 204, 21, 0.1);
+            color: var(--yellow);
+        }
+        
+        .course-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .course-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .course-rating {
+            color: var(--yellow);
+            font-weight: 600;
+        }
+        
+        /* CTA Section with Moving Gradient */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(-45deg, 
+                var(--primary), 
+                var(--purple), 
+                var(--accent), 
+                var(--primary-dark));
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta:before, .cta:after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            z-index: 1;
+        }
+        
+        .cta:before {
+            top: -150px;
+            left: -150px;
+        }
+        
+        .cta:after {
+            bottom: -150px;
+            right: -150px;
+        }
+        
+        .cta .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta h2 {
+            font-size: 42px;
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+        
+        .cta p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--light);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .testimonials {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .testimonial-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            border-top: 5px solid var(--primary-light);
+        }
+        
+        .testimonial-card:nth-child(2) {
+            border-top-color: var(--secondary);
+        }
+        
+        .testimonial-card:nth-child(3) {
+            border-top-color: var(--accent);
+        }
+        
+        .quote {
+            font-size: 50px;
+            color: var(--primary-light);
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            opacity: 0.1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--gray);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .author-info p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        /* Added New Moving Gradient Section */
+        .gradient-section {
+            padding: 100px 0;
+            background: linear-gradient(-45deg, 
+                var(--yellow), 
+                var(--secondary), 
+                var(--primary), 
+                var(--accent));
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        
+        .gradient-section h2 {
+            font-size: 42px;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gradient-section p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Footer with Moving Gradient */
+        footer {
+            background: linear-gradient(-45deg, 
+                var(--dark), 
+                #2d3748, 
+                #1a202c, 
+                var(--dark));
+            background-size: 400% 400%;
+            animation: gradient-animation 30s ease infinite;
+            color: white;
+            padding: 80px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer:before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.05);
+            top: -200px;
+            left: -200px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            position: relative;
+        }
+        
+        .footer-col h4 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-light), var(--primary));
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-col ul li a {
+            text-decoration: none;
+            color: #cbd5e1;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .footer-col ul li a:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-col ul li a:hover {
+            color: white;
+            padding-left: 20px;
+        }
+        
+        .footer-col ul li a:hover:before {
+            color: var(--primary-light);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        @media (max-width: 992px) {
+            .hero .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-content {
+                margin-bottom: 60px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .cta h2 {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .nav-links {
+                margin: 20px 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            h1 {
+                font-size: 42px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .feature-cards {
+                gap: 25px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            .feature-card, .course-card, .testimonial-card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">Osom<span>apti</span></div>
+                <div class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#">Courses</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Partnerships</a>
+                    <a href="#">Contact</a>
+                </div>
+                <a href="#" class="btn">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Ignite Your Learning Journey</h1>
+                <p>Dive into a vibrant world of personal and professional growth through interactive educational experiences designed to unleash your creativity and potential.</p>
+                <a href="#" class="btn hero-btn">Explore Courses</a>
+            </div>
+            <div class="hero-image">
+                <img src="/api/placeholder/500/500" alt="Education illustration">
+            </div>
+        </div>
+        <div class="wave-separator">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Osomapti?</h2>
+            <p class="section-subtitle">Our unique approach to education combines creativity, interactivity, and professional development to create transformative learning experiences.</p>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Dynamic Course Catalog</h3>
+                    <p>Explore our extensive catalog spanning various disciplines, each designed with interactive elements to engage and inspire your learning journey.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Interactive Experiences</h3>
+                    <p>Go beyond passive learning with immersive, hands-on educational experiences that build practical skills and spark creativity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Innovative Partnerships</h3>
+                    <p>Join our collaborative ecosystem of learners, educators, and industry partners creating the future of interactive education.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Added New Moving Gradient Section -->
+    <section class="gradient-section">
+        <div class="container">
+            <h2>Discover Your Learning Potential</h2>
+            <p>Our innovative approach combines modern technology with proven educational methods to deliver exceptional learning experiences that adapt to your unique needs and goals.</p>
+            <a href="#" class="btn">Start Your Journey</a>
+        </div>
+    </section>
+
+    <section class="courses">
+        <div class="container">
+            <h2 class="section-title">Featured Courses</h2>
+            <p class="section-subtitle">Discover our most popular interactive learning experiences</p>
+            <div class="course-cards">
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="/api/placeholder/400/300" alt="Creative Design Course">
+                    </div>
+                    <div class="course-content">
+                        <span class="course-tag">Creative</span>
+                        <h3>Interactive Design Thinking</h3>
+                        <p>Master the creative problem-solving approach used by leading innovators worldwide.</p>
+                        <div class="course-info">
+                            <span>8 Weeks</span>
+                            <span class="course-rating">★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="/api/placeholder/400/300" alt="Professional Development">
+                    </div>
+                    <div class="course-content">
+                        <span class="course-tag">Professional</span>
+                        <h3>Leadership Excellence</h3>
+                        <p>Develop the essential skills to lead teams effectively in today's dynamic workplace.</p>
+                        <div class="course-info">
+                            <span>6 Weeks</span>
+                            <span class="course-rating">★★★★☆</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="/api/placeholder/400/300" alt="Technical Skills">
+                    </div>
+                    <div class="course-content">
+                        <span class="course-tag">Technical</span>
+                        <h3>Data Science Fundamentals</h3>
+                        <p>Learn to analyze and interpret complex data sets with hands-on projects.</p>
+                        <div class="course-info">
+                            <span>10 Weeks</span>
+                            <span class="course-rating">★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="/api/placeholder/400/300" alt="Personal Growth">
+                    </div>
+                    <div class="course-content">
+                        <span class="course-tag">Personal</span>
+                        <h3>Mindfulness & Creativity</h3>
+                        <p>Discover how mindfulness practices can enhance your creative thinking abilities.</p>
+                        <div class="course-info">
+                            <span>4 Weeks</span>
+                            <span class="course-rating">★★★★☆</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your Learning Experience?</h2>
+            <p>Join thousands of learners who have unlocked their potential with Osomapti. Start your journey today and experience education like never before.</p>
+            <a href="#" class="btn btn-secondary">Sign Up Now</a>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Learners Say</h2>
+            <p class="section-subtitle">Hear from our community of learners who have transformed their skills and careers with Osomapti.</p>
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <div class="quote">“</div>
+                    <p class="testimonial-text">Osomapti has completely changed the way I approach learning. The interactive courses are engaging and practical, making it easy to apply what I learn in real-world scenarios.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/api/placeholder/100/100" alt="User Avatar">
+                        </div>
+                        <div class="author-info">
+                            <h4>John Doe</h4>
+                            <p>Creative Designer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote">“</div>
+                    <p class="testimonial-text">The Leadership Excellence course was a game-changer for me. I now feel confident leading my team and making strategic decisions that drive results.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/api/placeholder/100/100" alt="User Avatar">
+                        </div>
+                        <div class="author-info">
+                            <h4>Jane Smith</h4>
+                            <p>Team Lead</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote">“</div>
+                    <p class="testimonial-text">I never thought I could enjoy learning technical skills until I joined Osomapti. The Data Science course was challenging but incredibly rewarding.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/api/placeholder/100/100" alt="User Avatar">
+                        </div>
+                        <div class="author-info">
+                            <h4>Alex Johnson</h4>
+                            <p>Data Analyst</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>About Osomapti</h4>
+                    <p>Osomapti is a leading platform for interactive and transformative learning experiences. We empower learners to achieve their personal and professional goals through innovative education.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Courses</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Partnerships</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <p>Email: info@osomapti.com</p>
+                    <p>Phone: +1 (123) 456-7890</p>
+                    <p>Address: 123 Learning St, Knowledge City</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Osomapti. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
