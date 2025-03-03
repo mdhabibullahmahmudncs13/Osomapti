@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniHub - Sign Up</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #4776E6, #8E54E9);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        /* Container Styles */
+        .signup-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        /* Header Styles */
+        .signup-header {
+            text-align: center;
+            padding: 30px 20px 20px;
+        }
+        
+        .signup-header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .signup-header p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        /* Form Styles */
+        .signup-form {
+            padding: 10px 30px 30px;
+        }
+        
+        /* Message Styles */
+        .message {
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
+        
+        .success-message {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        /* Form Group Styles */
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #444;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1.5px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            background-color: #fafafa;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4776E6;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(71, 118, 230, 0.1);
+        }
+        
+        .invalid-input {
+            border-color: #e53935 !important;
+            background-color: #fff8f8 !important;
+        }
+        
+        .form-group .validation-message {
+            color: #e53935;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        /* Password Requirements */
+        .password-requirements {
+            font-size: 13px;
+            color: #666;
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+        
+        .password-requirements ul {
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+        
+        .password-requirements li {
+            margin-bottom: 3px;
+        }
+        
+        /* Terms Checkbox */
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            margin: 25px 0;
+        }
+        
+        .terms input {
+            margin-right: 12px;
+            margin-top: 3px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .terms label {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .terms a {
+            color: #4776E6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Button Styles */
+        .signup-button {
+            background-color: #4776E6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 14px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(71, 118, 230, 0.2);
+        }
+        
+        .signup-button:hover {
+            background-color: #3A67D7;
+            box-shadow: 0 6px 8px rgba(71, 118, 230, 0.3);
+        }
+        
+        .signup-button:disabled {
+            background-color: #a0b7e9;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        /* Login Link */
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .login-link p {
+            color: #666;
+            font-size: 15px;
+        }
+        
+        .login-link a {
+            color: #4776E6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer Styles */
+        .signup-footer {
+            background-color: #f5f7fa;
+            padding: 15px;
+            text-align: center;
+            border-top: 1px solid #eaecef;
+        }
+        
+        .signup-footer p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .signup-footer a {
+            color: #4776E6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .signup-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 580px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .signup-form {
+                padding: 10px 20px 20px;
+            }
+            
+            .signup-header {
+                padding: 25px 20px 15px;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+            
+            .signup-button {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-header">
+            <h1>Create Account</h1>
+            <p>Join UniHub - Your All-in-One University Companion</p>
+        </div>
+        
+        <div class="signup-form">
+            <div id="error-message" class="message error-message"></div>
+            <div id="success-message" class="message success-message"></div>
+            
+            <form id="signup-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name *</label>
+                        <input type="text" id="first-name" placeholder="Enter your first name" required>
+                        <div id="first-name-error" class="validation-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="last-name">Last Name *</label>
+                        <input type="text" id="last-name" placeholder="Enter your last name" required>
+                        <div id="last-name-error" class="validation-message"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="student-id">Student ID *</label>
+                    <input type="text" id="student-id" placeholder="e.g., 202512345" required>
+                    <div id="student-id-error" class="validation-message"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">University Email *</label>
+                    <input type="email" id="email" placeholder="student@university.edu" required>
+                    <div id="email-error" class="validation-message"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="department">Department *</label>
+                    <select id="department" required>
+                        <option value="" disabled selected>Select your department</option>
+                        <option value="computer-science">Computer Science</option>
+                        <option value="business">Business Administration</option>
+                        <option value="engineering">Engineering</option>
+                        <option value="medicine">Medicine</option>
+                        <option value="arts">Arts & Humanities</option>
+                        <option value="sciences">Natural Sciences</option>
+                        <option value="social-sciences">Social Sciences</option>
+                        <option value="law">Law</option>
+                        <option value="education">Education</option>
+                    </select>
+                    <div id="department-error" class="validation-message"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password *</label>
+                    <input type="password" id="password" required>
+                    <div id="password-error" class="validation-message"></div>
+                    <div class="password-requirements">
+                        Password must contain:
+                        <ul>
+                            <li>At least 8 characters</li>
+                            <li>At least one uppercase letter</li>
+                            <li>At least one number</li>
+                            <li>At least one special character (e.g., !@#$%^&*)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password *</label>
+                    <input type="password" id="confirm-password" required>
+                    <div id="confirm-password-error" class="validation-message"></div>
+                </div>
+                
+                <div class="terms">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I understand that my data will be used as described in the privacy policy.</label>
+                </div>
+                
+                <button type="submit" class="signup-button" id="signup-button">Create Account</button>
+                
+                <div class="login-link">
+                    <p>Already have an account? <a href="login.html">Sign in</a></p>
+                </div>
+            </form>
+        </div>
+        
+        <div class="signup-footer">
+            <p>Need help? Contact <a href="mailto:support@university.edu">IT Support</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get form elements
+            const signupForm = document.getElementById('signup-form');
+            const formElements = {
+                firstName: document.getElementById('first-name'),
+                lastName: document.getElementById('last-name'),
+                studentId: document.getElementById('student-id'),
+                email: document.getElementById('email'),
+                department: document.getElementById('department'),
+                password: document.getElementById('password'),
+                confirmPassword: document.getElementById('confirm-password'),
+                terms: document.getElementById('terms')
+            };
+            
+            const errorMessages = {
+                firstName: document.getElementById('first-name-error'),
+                lastName: document.getElementById('last-name-error'),
+                studentId: document.getElementById('student-id-error'),
+                email: document.getElementById('email-error'),
+                department: document.getElementById('department-error'),
+                password: document.getElementById('password-error'),
+                confirmPassword: document.getElementById('confirm-password-error')
+            };
+            
+            const signupButton = document.getElementById('signup-button');
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+            
+            // Validation functions
+            const validators = {
+                firstName: (value) => {
+                    if (!value.trim()) return "First name is required";
+                    if (value.length < 2) return "First name must be at least 2 characters";
+                    if (!/^[A-Za-z\s'-]+$/.test(value)) return "First name can only contain letters, spaces, hyphens, and apostrophes";
+                    return "";
+                },
+                
+                lastName: (value) => {
+                    if (!value.trim()) return "Last name is required";
+                    if (value.length < 2) return "Last name must be at least 2 characters";
+                    if (!/^[A-Za-z\s'-]+$/.test(value)) return "Last name can only contain letters, spaces, hyphens, and apostrophes";
+                    return "";
+                },
+                
+                studentId: (value) => {
+                    if (!value.trim()) return "Student ID is required";
+                    if (!/^\d{9}$/.test(value)) return "Student ID must be 9 digits";
+                    return "";
+                },
+                
+                email: (value) => {
+                    if (!value.trim()) return "Email is required";
+                    if (!value.endsWith('@university.edu')) return "Please use your university email address (@university.edu)";
+                    const emailRegex = /^[a-zA-Z0-9._%+-]+@university\.edu$/;
+                    if (!emailRegex.test(value)) return "Please enter a valid email address";
+                    return "";
+                },
+                
+                department: (value) => {
+                    if (!value) return "Please select your department";
+                    return "";
+                },
+                
+                password: (value) => {
+                    if (!value) return "Password is required";
+                    if (value.length < 8) return "Password must be at least 8 characters";
+                    if (!/[A-Z]/.test(value)) return "Password must contain at least one uppercase letter";
+                    if (!/\d/.test(value)) return "Password must contain at least one number";
+                    if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) return "Password must contain at least one special character";
+                    return "";
+                },
+                
+                confirmPassword: (value) => {
+                    if (!value) return "Please confirm your password";
+                    if (value !== formElements.password.value) return "Passwords do not match";
+                    return "";
+                }
+            };
+            
+            // Add input event listeners for real-time validation
+            Object.keys(formElements).forEach(field => {
+                if (field !== 'terms' && validators[field]) {
+                    formElements[field].addEventListener('input', () => {
+                        validateField(field);
+                    });
+                    
+                    formElements[field].addEventListener('blur', () => {
+                        validateField(field);
+                    });
+                }
+            });
+            
+            // Function to validate a specific field
+            function validateField(field) {
+                const element = formElements[field];
+                const errorElement = errorMessages[field];
+                
+                if (!element || !errorElement) return;
+                
+                const value = element.value;
+                const error = validators[field](value);
+                
+                if (error) {
+                    element.classList.add('invalid-input');
+                    errorElement.textContent = error;
+                    errorElement.style.display = 'block';
+                    return false;
+                } else {
+                    element.classList.remove('invalid-input');
+                    errorElement.style.display = 'none';
+                    return true;
+                }
+            }
+            
+            // Function to validate the entire form
+            function validateForm() {
+                let isValid = true;
+                
+                // Validate each field
+                Object.keys(validators).forEach(field => {
+                    if (!validateField(field)) {
+                        isValid = false;
+                    }
+                });
+                
+                // Validate terms checkbox
+                if (!formElements.terms.checked) {
+                    isValid = false;
+                    showError('You must agree to the Terms of Service and Privacy Policy');
+                }
+                
+                return isValid;
+            }
+            
+            // Form submission handler
+            signupForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Clear previous messages
+                hideMessages();
+                
+                // Validate form
+                if (!validateForm()) {
+                    return;
+                }
+                
+                // Disable signup button and show loading state
+                signupButton.disabled = true;
+                signupButton.textContent = 'Creating Account...';
+                
+                try {
+                    // Simulate API call with a delay
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    
+                    // In a real app, you would call your registration API here
+                    /* 
+                    const response = await fetch('/api/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            firstName: formElements.firstName.value,
+                            lastName: formElements.lastName.value,
+                            studentId: formElements.studentId.value,
+                            email: formElements.email.value,
+                            department: formElements.department.value,
+                            password: formElements.password.value
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Registration failed');
+                    }
+                    
+                    const data = await response.json();
+                    */
+                    
+                    // Show success message
+                    showSuccess('Account created successfully! Redirecting to login...');
+                    
+                    // Reset form
+                    signupForm.reset();
+                    
+                    // Redirect to login page after a delay
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 2000);
+                    
+                } catch (error) {
+                    // Show error message
+                    showError('An error occurred while creating your account. Please try again.');
+                    
+                    // Reset signup button
+                    signupButton.disabled = false;
+                    signupButton.textContent = 'Create Account';
+                }
+            });
+            
+            // Helper functions for displaying messages
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                signupButton.disabled = false;
+                signupButton.textContent = 'Create Account';
+                
+                // Scroll to error message
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            
+            function showSuccess(message) {
+                successMessage.textContent = message;
+                successMessage.style.display = 'block';
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            
+            function hideMessages() {
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
