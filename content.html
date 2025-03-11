@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osomapti | Content Library</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #C026D3 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/api/placeholder/1920/1080') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .gradient-overlay {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hover-up {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-up:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #4F46E5;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active-nav::after {
+            width: 100%;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: rgba(79, 70, 229, 0.1);
+            color: #4F46E5;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn-primary {
+            background-color: #4F46E5;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #4F46E5;
+        }
+        
+        .btn-primary:hover {
+            background-color: #4338CA;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: #4F46E5;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #4F46E5;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .category-pill {
+            transition: all 0.3s ease;
+        }
+        
+        .category-pill:hover {
+            transform: translateY(-2px);
+        }
+        
+        .category-pill.active {
+            background-color: #4F46E5;
+            color: white;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900 bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">Osomapti</span>
+                    </div>
+                    <div class="hidden sm:ml-10 sm:flex sm:space-x-8">
+                        <a href="#" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Home</a>
+                        <a href="#" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">About</a>
+                        <a href="#" class="nav-link active-nav border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Content</a>
+                        <a href="#" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Events</a>
+                        <a href="#" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Community</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <button class="btn-secondary mr-4">Login</button>
+                    <button class="btn-primary">Sign Up Free</button>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="gradient-bg relative">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:py-20 sm:px-6 lg:px-8 gradient-overlay">
+            <div class="text-center">
+                <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl sm:tracking-tight md:text-6xl">
+                    <span class="block">Explore Our</span>
+                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-green-200 to-green-300">Content Library</span>
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-xl text-indigo-100 leading-relaxed">
+                    Dive into a world of knowledge with our diverse collection of articles, essays, blogs, and more. 
+                    Discover new perspectives and expand your horizons with Osomapti.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search and Filters -->
+    <div class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div class="relative w-full md:w-1/3 mb-4 md:mb-0">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-gray-400"></i>
+                    </div>
+                    <input type="text" placeholder="Search for content..." class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div class="flex overflow-x-auto pb-2 md:pb-0 space-x-2 no-scrollbar">
+                    <button class="category-pill active px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">All</button>
+                    <button class="category-pill px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">Articles</button>
+                    <button class="category-pill px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">Essays</button>
+                    <button class="category-pill px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">Blogs</button>
+                    <button class="category-pill px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">Tutorials</button>
+                    <button class="category-pill px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">Research</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Content -->
+    <div class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-base font-semibold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">Featured Content</h2>
+                <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">Editor's Picks</p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Handpicked content that our editors think you'll love.</p>
+            </div>
+
+            <div class="mt-12">
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-up">
+                        <div class="relative">
+                            <img src="/api/placeholder/600/400" alt="The Science of Learning" class="w-full h-48 object-cover">
+                            <div class="absolute top-4 right-4 bg-indigo-600 text-white px-3 py-1 rounded-full text-xs">Featured</div>
+                        </div>
+                        <div class="p-6">
+                            <span class="tag">Science</span>
+                            <span class="tag">Education</span>
+                            <h3 class="mt-3 text-xl font-bold text-gray-900">The Science of Learning: How Our Brains Process Information</h3>
+                            <p class="mt-3 text-base text-gray-500">Dive into the fascinating world of neuroscience and discover how our brains process and retain information.</p>
+                            <div class="mt-6 flex items-center">
+                                <img src="/api/placeholder/40/40" alt="Author" class="h-10 w-10 rounded-full">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">Dr. Emily Chen</p>
+                                    <p class="text-sm text-gray-500">Mar 10, 2023 · 12 min read</p>
+                                </div>
+                            </div>
+                            <a href="#" class="mt-6 block text-center bg-indigo-50 text-indigo-600 py-2 rounded-md font-medium hover:bg-indigo-100 transition-colors">Read Article</a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-up">
+                        <div class="relative">
+                            <img src="/api/placeholder/600/400" alt="Philosophy of Knowledge" class="w-full h-48 object-cover">
+                            <div class="absolute top-4 right-4 bg-indigo-600 text-white px-3 py-1 rounded-full text-xs">Featured</div>
+                        </div>
+                        <div class="p-6">
+                            <span class="tag">Philosophy</span>
+                            <span class="tag">Critical Thinking</span>
+                            <h3 class="mt-3 text-xl font-bold text-gray-900">The Philosophy of Knowledge: What Does It Mean to Know?</h3>
+                            <p class="mt-3 text-base text-gray-500">An exploration of epistemology and the different ways humans have understood the concept of knowledge throughout history.</p>
+                            <div class="mt-6 flex items-center">
+                                <img src="/api/placeholder/40/40" alt="Author" class="h-10 w-10 rounded-full">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">Prof. James Wilson</p>
+                                    <p class="text-sm text-gray-500">Feb 28, 2023 · 15 min read</p>
+                                </div>
+                            </div>
+                            <a href="#" class="mt-6 block text-center bg-indigo-50 text-indigo-600 py-2 rounded-md font-medium hover:bg-indigo-100 transition-colors">Read Essay</a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-up">
+                        <div class="relative">
+                            <img src="/api/placeholder/600/400" alt="Digital Creativity" class="w-full h-48 object-cover">
+                            <div class="absolute top-4 right-4 bg-indigo-600 text-white px-3 py-1 rounded-full text-xs">Featured</div>
+                        </div>
+                        <div class="p-6">
+                            <span class="tag">Technology</span>
+                            <span class="tag">Creativity</span>
+                            <h3 class="mt-3 text-xl font-bold text-gray-900">Digital Creativity: Tools and Techniques for the Modern Creator</h3>
+                            <p class="mt-3 text-base text-gray-500">A comprehensive guide to leveraging digital tools for enhancing creativity and producing innovative content.</p>
+                            <div class="mt-6 flex items-center">
+                                <img src="/api/placeholder/40/40" alt="Author" class="h-10 w-10 rounded-full">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">Alex Rivera</p>
+                                    <p class="text-sm text-gray-500">Mar 5, 2023 · 10 min read</p>
+                                </div>
+                            </div>
+                            <a href="#" class="mt-6 block text-center bg-indigo-50 text-indigo-600 py-2 rounded-md font-medium hover:bg-indigo-100 transition-colors">Read Guide</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Latest Content -->
+    <div class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-base font-semibold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">Latest Uploads</h2>
+                    <p class="mt-2 text-3xl font-extrabold text-gray-900">Fresh Content</p>
+                </div>
+                <a href="#" class="hidden md:inline-flex items-center text-base font-medium text-indigo-600 hover:text-indigo-500">
+                    View All <span aria-hidden="true" class="ml-1">&rarr;</span>
+                </a>
+            </div>
+
+            <div class="mt-12 grid gap-5 max-w-lg mx-auto lg:grid-cols-3 lg:max-w-none">
+                <div class="flex flex-col rounded-lg shadow-lg overflow-hidden hover-up">
+                    <div class="flex-shrink-0">
+                        <img class="h-48 w-full object-cover" src="/api/placeholder/600/400" alt="Financial Literacy">
+                    </div>
+                    <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                        <div class="flex-1">
+                            <span class="tag">Finance</span>
+                            <span class="tag">Education</span>
+                            <a href="#" class="block mt-2">
+                                <p class="text-xl font-semibold text-gray-900">Financial Literacy: Essential Skills for the Modern World</p>
+                                <p class="mt-3 text-base text-gray-500">Practical strategies for improving your financial knowledge and making informed decisions about money.</p>
+                            </a>
+                        </div>
+                        <div class="mt-6 flex items-center">
+                            <div class="flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full" src="/api/placeholder/40/40" alt="Author">
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">Sarah Johnson</p>
+                                <div class="flex space-x-1 text-sm text-gray-500">
+                                    <time datetime="2023-03-09">Mar 9, 2023</time>
+                                    <span aria-hidden="true">&middot;</span>
+                                    <span>8 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col rounded-lg shadow-lg overflow-hidden hover-up">
+                    <div class="flex-shrink-0">
+                        <img class="h-48 w-full object-cover" src="/api/placeholder/600/400" alt="Sustainable Living">
+                    </div>
+                    <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                        <div class="flex-1">
+                            <span class="tag">Environment</span>
+                            <span class="tag">Lifestyle</span>
+                            <a href="#" class="block mt-2">
+                                <p class="text-xl font-semibold text-gray-900">Sustainable Living: Small Changes, Big Impact</p>
+                                <p class="mt-3 text-base text-gray-500">Discover practical ways to adopt a more sustainable lifestyle and reduce your environmental footprint.</p>
+                            </a>
+                        </div>
+                        <div class="mt-6 flex items-center">
+                            <div class="flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full" src="/api/placeholder/40/40" alt="Author">
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">Maya Patel</p>
+                                <div class="flex space-x-1 text-sm text-gray-500">
+                                    <time datetime="2023-03-08">Mar 8, 2023</time>
+                                    <span aria-hidden="true">&middot;</span>
+                                    <span>6 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col rounded-lg shadow-lg overflow-hidden hover-up">
+                    <div class="flex-shrink-0">
+                        <img class="h-48 w-full object-cover" src="/api/placeholder/600/400" alt="Digital Privacy">
+                    </div>
+                    <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                        <div class="flex-1">
+                            <span class="tag">Technology</span>
+                            <span class="tag">Security</span>
+                            <a href="#" class="block mt-2">
+                                <p class="text-xl font-semibold text-gray-900">Digital Privacy in the Age of Information</p>
+                                <p class="mt-3 text-base text-gray-500">Exploring the challenges of maintaining privacy in our increasingly connected world.</p>
+                            </a>
+                        </div>
+                        <div class="mt-6 flex items-center">
+                            <div class="flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full" src="/api/placeholder/40/40" alt="Author">
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">David Wong</p>
+                                <div class="flex space-x-1 text-sm text-gray-500">
+                                    <time datetime="2023-03-07">Mar 7, 2023</time>
+                                    <span aria-hidden="true">&middot;</span>
+                                    <span>9 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center md:hidden">
+                <a href="#" class="inline-flex items-center text-base font-medium text-indigo-600 hover:text-indigo-500">
+                    View All <span aria-hidden="true" class="ml-1">&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popular Categories -->
+    <div class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-base font-semibold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">Categories</h2>
+                <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">Explore by Interest</p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Browse through our most popular topics and find content that matches your interests.</p>
+            </div>
+
+            <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-up">
+                    <div class="h-40 bg-gradient-to-r from-blue-500 to-blue-700 flex items-center justify-center">
+                        <i class="fas fa-microscope text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-lg font-bold text-gray-900">Science & Technology</h3>
+                        <p class="mt-2 text-sm text-gray-500">Explore the latest scientific discoveries and technological innovations.</p>
+                        <div class="mt-4">
+                            <span class="text-xs text-gray-500">325 articles</span>
+                        </div>
+                        <a href="#" class="mt-4 inline-block text-indigo-600 font-medium hover:text-indigo-500">Browse Category →</a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-up">
+                    <div class="h-40 bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center">
+                        <i class="fas fa-brain text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-lg font-bold text-gray-900">Personal Development</h3>
+                        <p class="mt-2 text-sm text-gray-500">Resources to help you grow and achieve your personal and professional goals.</p>
+                        <div class="mt-4">
+                            <span class="text-xs text-gray-500">289 articles</span>
+                        </div>
+                        <a href="#" class="mt-4 inline-block text-indigo-600 font-medium hover:text-indigo-500">Browse Category →</a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-up">
+                    <div class="h-40 bg-gradient-to-r from-purple-500 to-purple-700 flex items-center justify-center">
+                        <i class="fas fa-book text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-lg font-bold text-gray-900">Arts & Humanities</h3>
+                        <p class="mt-2 text-sm text-gray-500">Dive into literature, philosophy, history, and the visual arts.</p>
+                        <div class="mt-4">
+                            <span class="text-xs text-gray-500">215 articles</span>
+                        </div>
+                        <a href="#" class="mt-4 inline-block text-indigo-600 font-medium hover:text-indigo-500">Browse Category →</a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-up">
+                    <div class="h-40 bg-gradient-to-r from-yellow-500 to-yellow-700 flex items-center justify-center">
+                        <i class="fas fa-globe text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-lg font-bold text-gray-900">Global Perspectives</h3>
+                        <p class="mt-2 text-sm text-gray-500">Insights into different cultures, societies, and global issues.</p>
+                        <div class="mt-4">
+                            <span class="text-xs text-gray-500">178 articles</span>
+                        </div>
+                        <a href="#" class="mt-4 inline-block text-indigo-600 font-medium hover:text-indigo-500">Browse Category →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="#" class="btn-primary inline-flex items-center text-base">
+                    View All Categories
+                    <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Most Read This Week -->
+    <div class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-base font-semibold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">Trending Now</h2>
+                <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">Most Read This Week</p>
+            </div>
+
+            <div class="mt-12 space-y-8">
+                <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden hover:bg-indigo-50 transition-colors">
+                    <div class="p-6 lg:flex lg:items-center">
+                        <div class="flex-1">
+                            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                                <svg class="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+                                    <circle cx="4" cy="4" r="3" />
+                                </svg>
+                                Trending
+                            </span>
+                            <h3 class="mt-2 text-xl font-bold text-gray-900">The Surprising Benefits of Continuous Learning for Mental Health</h3>
