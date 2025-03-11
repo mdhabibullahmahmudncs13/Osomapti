@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Osomapti | Endless Learning Journey</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #C026D3 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/api/placeholder/1920/1080') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .gradient-overlay {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hover-up {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-up:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #4F46E5;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active-nav::after {
+            width: 100%;
+        }
+        
+        .custom-shape-divider-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        
+        .custom-shape-divider-bottom svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 70px;
+        }
+        
+        .custom-shape-divider-bottom .shape-fill {
+            fill: #FFFFFF;
+        }
+        
+        .btn-primary {
+            background-color: #4F46E5;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #4F46E5;
+        }
+        
+        .btn-primary:hover {
+            background-color: #4338CA;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: #4F46E5;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #4F46E5;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .timeline-container {
+            position: relative;
+        }
+        
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 18px;
+            height: 100%;
+            width: 4px;
+            background: #4F46E5;
+        }
+        
+        .timeline-item {
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            left: 12px;
+            top: 24px;
+            background: #4F46E5;
+            border: 3px solid white;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900 bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">Osomapti</span>
+                    </div>
+                    <div class="hidden sm:ml-10 sm:flex sm:space-x-8">
+                        <a href="index.html" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Home</a>
+                        <a href="about.html" class="nav-link active-nav border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">About</a>
+                        <a href="#" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Content</a>
+                        <a href="#" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Events</a>
+                        <a href="#" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Community</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <button class="btn-secondary mr-4">Login</button>
+                    <button class="btn-primary">Sign Up Free</button>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="gradient-bg relative">
+        <div class="max-w-7xl mx-auto py-20 px-4 sm:py-28 sm:px-6 lg:px-8 gradient-overlay">
+            <div class="text-center">
+                <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl sm:tracking-tight md:text-6xl">
+                    <span class="block">About </span>
+                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-green-200 to-green-300">Osomapti</span>
+                </h1>
+                <p class="mt-6 text-xl text-indigo-100 leading-relaxed max-w-3xl mx-auto">Discover the story behind our endless learning journey and our mission to create a vibrant community of curious minds.</p>
+            </div>
+        </div>
+        <div class="custom-shape-divider-bottom">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Our Story Section -->
+    <div class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Story</h2>
+                    <div class="mt-6 text-lg text-gray-500 space-y-6">
+                        <p>Osomapti, meaning "infinite" or "endless," was born from a simple yet powerful idea: learning should be a continuous and everlasting journey. We believe that education doesn't end with formal schooling but continues throughout life.</p>
+                        <p>What started as a small blog has grown into a dynamic publishing platform that connects learners and writers from around the world. Our journey reflects our core belief: that curiosity knows no bounds.</p>
+                        <p>Today, Osomapti stands as one of the few places where you can find practically everything, from articles and essays to blogs and skill-improving tips. We continue to grow and evolve, driven by our community's passion for knowledge.</p>
+                    </div>
+                    <div class="mt-8">
+                        <a href="#" class="btn-primary inline-flex items-center">
+                            Our Journey
+                            <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-10 lg:mt-0">
+                    <div class="relative rounded-2xl overflow-hidden shadow-xl">
+                        <img src="/api/placeholder/600/400" alt="Osomapti Team" class="w-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mission & Vision -->
+    <div class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-base font-semibold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">Our Purpose</h2>
+                <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">Mission & Vision</p>
+            </div>
+
+            <div class="mt-16 lg:grid lg:grid-cols-2 lg:gap-16">
+                <div class="relative bg-white rounded-xl overflow-hidden shadow-lg p-8 hover-up">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-indigo-600"></div>
+                    <div class="flex items-center">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 text-white">
+                            <i class="fas fa-bullseye text-xl"></i>
+                        </div>
+                        <h3 class="ml-4 text-2xl font-bold text-gray-900">Our Mission</h3>
+                    </div>
+                    <p class="mt-6 text-lg text-gray-600">Our mission is to provide a platform where anyone, regardless of who they are, can access effective and enjoyable learning. We strive to create content that sparks curiosity and allows intellectual growth to keep reaching new levels. By organizing writing contests and other events, we build an energetic community where people can share and associate with others who have similar interests.</p>
+                </div>
+
+                <div class="relative bg-white rounded-xl overflow-hidden shadow-lg p-8 hover-up mt-8 lg:mt-0">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-purple-600"></div>
+                    <div class="flex items-center">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-purple-600 text-white">
+                            <i class="fas fa-eye text-xl"></i>
+                        </div>
+                        <h3 class="ml-4 text-2xl font-bold text-gray-900">Our Vision</h3>
+                    </div>
+                    <p class="mt-6 text-lg text-gray-600">We envision a world where learning is not confined to classrooms but is a lifelong pursuit embraced by all. We aim to be the leading platform that transforms how people access and engage with knowledge, making learning an exciting adventure rather than a chore. By fostering a global community of curious minds, we hope to contribute to a more informed, creative, and thoughtful society.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- What We Offer -->
+    <div class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-base font-semibold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">Our Offerings</h2>
+                <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">What We Offer</p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Osomapti is more than just a publishing platform; it's a comprehensive learning ecosystem.</p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover-up">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-100 mx-auto">
+                        <i class="fas fa-book-open text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="mt-6 text-xl font-bold text-gray-900 text-center">Diverse Content</h3>
+                    <p class="mt-4 text-gray-600">From articles and essays to blogs and skill-improving tips, we provide a wide range of engaging content that caters to different interests and learning preferences.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover-up">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-purple-100 mx-auto">
+                        <i class="fas fa-trophy text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="mt-6 text-xl font-bold text-gray-900 text-center">Writing Contests</h3>
+                    <p class="mt-4 text-gray-600">We organize regular writing contests where everyone is free to participate, share their work, and receive feedback, helping them refine their writing skills.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover-up">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-pink-100 mx-auto">
+                        <i class="fas fa-users text-pink-600 text-2xl"></i>
+                    </div>
+                    <h3 class="mt-6 text-xl font-bold text-gray-900 text-center">Community Events</h3>
+                    <p class="mt-4 text-gray-600">Our various events bring together like-minded individuals, creating an energetic community of learners who inspire and motivate each other.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover-up">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mx-auto">
+                        <i class="fas fa-lightbulb text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="mt-6 text-xl font-bold text-gray-900 text-center">Skill Development</h3>
+                    <p class="mt-4 text-gray-600">For advanced writers or anyone looking to polish their skills, we provide resources, feedback, and opportunities to grow and improve.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover-up">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-yellow-100 mx-auto">
+                        <i class="fas fa-globe text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="mt-6 text-xl font-bold text-gray-900 text-center">Global Perspective</h3>
+                    <p class="mt-4 text-gray-600">Our diverse community brings together perspectives from around the world, enriching the learning experience with varied cultural insights.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover-up">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mx-auto">
+                        <i class="fas fa-handshake text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="mt-6 text-xl font-bold text-gray-900 text-center">Collaborative Learning</h3>
+                    <p class="mt-4 text-gray-600">We foster an environment where collaboration trumps competition, encouraging members to learn from each other and grow together.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Values -->
+    <div class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-base font-semibold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">Guiding Principles</h2>
+                <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Core Values</p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">These principles guide everything we do at Osomapti.</p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover-up">
+                    <div class="p-8">
+                        <div class="flex items-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100">
+                                <i class="fas fa-infinity text-indigo-600 text-xl"></i>
+                            </div>
+                            <h3 class="ml-4 text-xl font-bold text-gray-900">Endless Learning</h3>
+                        </div>
+                        <p class="mt-4 text-gray-600">We believe learning is a lifelong journey without boundaries. Education should be continuous and everlasting, constantly reaching new heights.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover-up">
+                    <div class="p-8">
+                        <div class="flex items-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-purple-100">
+                                <i class="fas fa-universal-access text-purple-600 text-xl"></i>
+                            </div>
+                            <h3 class="ml-4 text-xl font-bold text-gray-900">Inclusivity</h3>
+                        </div>
+                        <p class="mt-4 text-gray-600">Knowledge should be accessible to everyone, regardless of background. We strive to create content that resonates with diverse audiences.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover-up">
+                    <div class="p-8">
+                        <div class="flex items-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                                <i class="fas fa-lightbulb text-green-600 text-xl"></i>
+                            </div>
+                            <h3 class="ml-4 text-xl font-bold text-gray-900">Curiosity</h3>
+                        </div>
+                        <p class="mt-4 text-gray-600">We nurture and celebrate curiosity as the driving force behind all learning. Asking questions leads to discoveries and growth.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover-up">
+                    <div class="p-8">
+                        <div class="flex items-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-pink-100">
+                                <i class="fas fa-users text-pink-600 text-xl"></i>
+                            </div>
+                            <h3 class="ml-4 text-xl font-bold text-gray-900">Community</h3>
+                        </div>
+                        <p class="mt-4 text-gray-600">Learning is enhanced when shared. We foster a supportive community where members can connect, collaborate, and inspire each other.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Team -->
+    <div class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-base font-semibold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">The People Behind Osomapti</h2>
+                <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">Meet Our Team</p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Passionate individuals committed to making learning accessible and enjoyable for everyone.</p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Team Member 1 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg hover-up">
+                    <img src="/api/placeholder/400/300" alt="Team Member" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900">Jaya Patel</h3>
+                        <p class="text-sm text-indigo-600 font-medium">Founder & CEO</p>
+                        <p class="mt-4 text-gray-600">Passionate about democratizing education and making learning accessible to all.</p>
+                        <div class="mt-4 flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg hover-up">
+                    <img src="/api/placeholder/400/300" alt="Team Member" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900">Marcus Chen</h3>
+                        <p class="text-sm text-indigo-600 font-medium">Head of Content</p>
+                        <p class="mt-4 text-gray-600">With a background in journalism, Marcus brings quality and diversity to our content strategy.</p>
+                        <div class="mt-4 flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg hover-up">
+                    <img src="/api/placeholder/400/300" alt="Team Member" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900">Sophia Rodriguez</h3>
+                        <p class="text-sm text-indigo-600 font-medium">Community Manager</p>
+                        <p class="mt-4 text-gray-600">Dedicated to building and nurturing our vibrant community of writers and learners.</p>
+                        <div class="mt-4 flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-500">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="#" class="btn-secondary inline-flex items-center">
+                    View Full Team
+                    <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Join Us Section -->
+    <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
