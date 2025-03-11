@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osomapti | Events & Competitions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #C026D3 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/api/placeholder/1920/1080') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .gradient-overlay {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hover-up {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-up:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #4F46E5;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active-nav::after {
+            width: 100%;
+        }
+        
+        .custom-shape-divider-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        
+        .custom-shape-divider-bottom svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 70px;
+        }
+        
+        .custom-shape-divider-bottom .shape-fill {
+            fill: #FFFFFF;
+        }
+        
+        .btn-primary {
+            background-color: #4F46E5;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #4F46E5;
+        }
+        
+        .btn-primary:hover {
+            background-color: #4338CA;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: #4F46E5;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #4F46E5;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .event-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: rgba(79, 70, 229, 0.1);
+            color: #4F46E5;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .event-date {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: #4F46E5;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab-active {
+            background-color: #4F46E5;
+            color: white;
+        }
+        
+        .tab-inactive {
+            background-color: #F3F4F6;
+            color: #374151;
+        }
+        
+        .tab-inactive:hover {
+            background-color: #E5E7EB;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900 bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">Osomapti</span>
+                    </div>
+                    <div class="hidden sm:ml-10 sm:flex sm:space-x-8">
+                        <a href="#" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Home</a>
+                        <a href="#" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">About</a>
+                        <a href="#" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Content</a>
+                        <a href="#" class="nav-link active-nav border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Events</a>
+                        <a href="#" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Community</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <button class="btn-secondary mr-4">Login</button>
+                    <button class="btn-primary">Sign Up Free</button>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="gradient-bg relative">
+        <div class="max-w-7xl mx-auto py-20 px-4 sm:py-32 sm:px-6 lg:px-8 gradient-overlay">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+                <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+                    <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl sm:tracking-tight md:text-6xl">
+                        <span class="block">Participate & </span>
+                        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-green-200 to-green-300">Connect</span>
+                        <span class="block">with Osomapti</span>
+                    </h1>
+                    <p class="mt-6 text-xl text-indigo-100 leading-relaxed">Join our vibrant community through writing contests, workshops, webinars, and meetups. Showcase your talent, enhance your skills, and connect with like-minded individuals.</p>
+                    <div class="mt-10 sm:flex sm:justify-center lg:justify-start">
+                        <div class="rounded-md shadow">
+                            <a href="#upcoming" class="btn-primary inline-flex items-center text-base">
+                                Upcoming Events
+                                <svg class="ml-3 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="mt-3 sm:mt-0 sm:ml-3">
+                            <a href="#submit" class="btn-secondary inline-flex items-center text-base">
+                                Submit Your Event
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+                    <div class="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md floating">
+                        <div class="relative block w-full bg-white rounded-lg overflow-hidden">
+                            <img src="/api/placeholder/600/400" alt="Osomapti Event" class="w-full">
+                            <div class="absolute inset-0 w-full h-full flex items-center justify-center">
+                                <svg class="h-20 w-20 text-indigo-500" fill="currentColor" viewBox="0 0 84 84">
+                                    <circle opacity="0.9" cx="42" cy="42" r="42" fill="white"></circle>
+                                    <path d="M55 42L35 55V29L55 42Z" fill="currentColor"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="custom-shape-divider-bottom">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Event Tabs -->
+    <div class="bg-white py-12" id="upcoming">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-base font-semibold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">Events & Competitions</h2>
+                <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">Join Our Community Activities</p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Discover upcoming events, competitions, and activities designed to help you grow and connect with others.</p>
+            </div>
+
+            <!-- Event Type Tabs -->
+            <div class="flex flex-wrap justify-center mt-12 mb-8 space-x-2">
+                <button class="px-6 py-3 rounded-full mb-2 tab-active">All Events</button>
+                <button class="px-6 py-3 rounded-full mb-2 tab-inactive">Writing Contests</button>
+                <button class="px-6 py-3 rounded-full mb-2 tab-inactive">Workshops</button>
+                <button class="px-6 py-3 rounded-full mb-2 tab-inactive">Webinars</button>
+                <button class="px-6 py-3 rounded-full mb-2 tab-inactive">Meetups</button>
+            </div>
+
+            <!-- Featured Event -->
+            <div class="mt-12 relative rounded-2xl overflow-hidden shadow-xl">
+                <div class="relative h-96">
+                    <img src="/api/placeholder/1200/600" alt="Featured Event" class="absolute h-full w-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-r from-indigo-900 via-indigo-900/70 to-transparent opacity-90"></div>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end">
+                        <span class="event-date text-sm">April 15-17, 2025</span>
+                        <div class="mb-4">
+                            <span class="event-tag">Featured</span>
+                            <span class="event-tag">Conference</span>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-2">Annual Osomapti Writing Summit 2025</h3>
+                        <p class="text-indigo-100 mb-6 max-w-2xl">Join us for three days of inspiration, learning, and networking with fellow writers, publishers, and industry experts. Featuring workshops, keynote speeches, and masterclasses.</p>
+                        <div class="flex flex-wrap">
+                            <a href="#" class="btn-primary inline-flex items-center mr-4 mb-2">
+                                Register Now
+                                <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                            <a href="#" class="btn-secondary inline-flex items-center mb-2">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Events Grid -->
+            <div class="mt-16 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                <!-- Event 1 -->
+                <div class="group relative bg-white rounded-xl overflow-hidden shadow-lg hover-up">
+                    <div class="relative w-full h-60 bg-gray-200 group-hover:opacity-90">
+                        <img src="/api/placeholder/600/400" alt="Short Story Contest" class="w-full h-full object-cover">
+                        <span class="event-date text-sm">March 25, 2025</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500">
+                                <i class="fas fa-trophy text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Short Story Contest</h3>
+                        </div>
+                        <div class="mt-4">
+                            <span class="event-tag">Writing Contest</span>
+                            <span class="event-tag">Fiction</span>
+                        </div>
+                        <p class="mt-4 text-base text-gray-500">Submit your best short story under 5,000 words for a chance to win prizes and get published on Osomapti.</p>
+                        <div class="mt-6 flex items-center justify-between">
+                            <span class="text-sm text-gray-500"><i class="far fa-clock mr-2"></i>Submission Deadline: March 20</span>
+                            <a href="#" class="text-base font-medium text-indigo-600 hover:text-indigo-500">
+                                Details <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="group relative bg-white rounded-xl overflow-hidden shadow-lg hover-up">
+                    <div class="relative w-full h-60 bg-gray-200 group-hover:opacity-90">
+                        <img src="/api/placeholder/600/400" alt="Memoir Writing Workshop" class="w-full h-full object-cover">
+                        <span class="event-date text-sm">April 2, 2025</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center justify-center h-10 w-10 rounded-md bg-purple-500">
+                                <i class="fas fa-book-open text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Memoir Writing Workshop</h3>
+                        </div>
+                        <div class="mt-4">
+                            <span class="event-tag">Workshop</span>
+                            <span class="event-tag">Memoir</span>
+                        </div>
+                        <p class="mt-4 text-base text-gray-500">Learn how to craft compelling personal narratives with author and writing coach Jane Morrison in this interactive online workshop.</p>
+                        <div class="mt-6 flex items-center justify-between">
+                            <span class="text-sm text-gray-500"><i class="far fa-clock mr-2"></i>1:00 PM - 3:00 PM EST</span>
+                            <a href="#" class="text-base font-medium text-indigo-600 hover:text-indigo-500">
+                                Register <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="group relative bg-white rounded-xl overflow-hidden shadow-lg hover-up">
+                    <div class="relative w-full h-60 bg-gray-200 group-hover:opacity-90">
+                        <img src="/api/placeholder/600/400" alt="Publishing Industry Webinar" class="w-full h-full object-cover">
+                        <span class="event-date text-sm">April 10, 2025</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center justify-center h-10 w-10 rounded-md bg-pink-500">
+                                <i class="fas fa-laptop text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Publishing Industry Insights</h3>
+                        </div>
+                        <div class="mt-4">
+                            <span class="event-tag">Webinar</span>
+                            <span class="event-tag">Publishing</span>
+                        </div>
+                        <p class="mt-4 text-base text-gray-500">Get insider knowledge on the current state of publishing, trends, and how to navigate the industry with our panel of experts.</p>
+                        <div class="mt-6 flex items-center justify-between">
+                            <span class="text-sm text-gray-500"><i class="far fa-clock mr-2"></i>11:00 AM - 12:30 PM EST</span>
+                            <a href="#" class="text-base font-medium text-indigo-600 hover:text-indigo-500">
+                                RSVP <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 4 -->
+                <div class="group relative bg-white rounded-xl overflow-hidden shadow-lg hover-up">
+                    <div class="relative w-full h-60 bg-gray-200 group-hover:opacity-90">
+                        <img src="/api/placeholder/600/400" alt="Poetry Slam" class="w-full h-full object-cover">
+                        <span class="event-date text-sm">April 22, 2025</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500">
+                                <i class="fas fa-microphone-alt text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Virtual Poetry Slam</h3>
+                        </div>
+                        <div class="mt-4">
+                            <span class="event-tag">Competition</span>
+                            <span class="event-tag">Poetry</span>
+                        </div>
+                        <p class="mt-4 text-base text-gray-500">Showcase your poetic talent in our quarterly virtual poetry slam. Perform your work live and compete for prizes and recognition.</p>
+                        <div class="mt-6 flex items-center justify-between">
+                            <span class="text-sm text-gray-500"><i class="far fa-clock mr-2"></i>7:00 PM - 9:00 PM EST</span>
+                            <a href="#" class="text-base font-medium text-indigo-600 hover:text-indigo-500">
+                                Sign Up <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 5 -->
+                <div class="group relative bg-white rounded-xl overflow-hidden shadow-lg hover-up">
+                    <div class="relative w-full h-60 bg-gray-200 group-hover:opacity-90">
+                        <img src="/api/placeholder/600/400" alt="Character Development Workshop" class="w-full h-full object-cover">
+                        <span class="event-date text-sm">May 5, 2025</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center justify-center h-10 w-10 rounded-md bg-purple-500">
+                                <i class="fas fa-users text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Character Development</h3>
+                        </div>
+                        <div class="mt-4">
+                            <span class="event-tag">Workshop</span>
+                            <span class="event-tag">Fiction</span>
+                        </div>
+                        <p class="mt-4 text-base text-gray-500">Learn techniques for creating compelling, three-dimensional characters that captivate readers and drive your stories forward.</p>
+                        <div class="mt-6 flex items-center justify-between">
+                            <span class="text-sm text-gray-500"><i class="far fa-clock mr-2"></i>2:00 PM - 4:00 PM EST</span>
+                            <a href="#" class="text-base font-medium text-indigo-600 hover:text-indigo-500">
+                                Register <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 6 -->
+                <div class="group relative bg-white rounded-xl overflow-hidden shadow-lg hover-up">
+                    <div class="relative w-full h-60 bg-gray-200 group-hover:opacity-90">
+                        <img src="/api/placeholder/600/400" alt="Writers Meetup" class="w-full h-full object-cover">
+                        <span class="event-date text-sm">May 18, 2025</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center justify-center h-10 w-10 rounded-md bg-pink-500">
+                                <i class="fas fa-handshake text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Writer's Network Meetup</h3>
+                        </div>
+                        <div class="mt-4">
+                            <span class="event-tag">Meetup</span>
+                            <span class="event-tag">Networking</span>
+                        </div>
+                        <p class="mt-4 text-base text-gray-500">Connect with fellow writers in your area, share experiences, get feedback on your work, and build your creative network.</p>
+                        <div class="mt-6 flex items-center justify-between">
+                            <span class="text-sm text-gray-500"><i class="far fa-clock mr-2"></i>6:30 PM - 8:30 PM EST</span>
+                            <a href="#" class="text-base font-medium text-indigo-600 hover:text-indigo-500">
+                                Join <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="#" class="btn-primary inline-flex items-center">
+                    View All Events
+                    <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Past Events Gallery -->
+    <div class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-base font-semibold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">Community Highlights</h2>
+                <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">Explore Our Past Events</p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Take a glimpse at our vibrant community in action through photos and highlights from previous Osomapti events.</p>
+            </div>
+
+            <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="col-span-1 sm:col-span-2 lg:col-span-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Gallery Item 1 -->
+                        <div class="relative rounded-xl overflow-hidden shadow-lg hover-up">
+                            <img src="/api/placeholder/600/400" alt="Event Gallery" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                                <p class="text-white text-lg font-semibold">Writing Summit 2024</p>
+                            </div>
+                        </div>
+
+                        <!-- Gallery Item 2 -->
+                        <div class="relative rounded-xl overflow-hidden shadow-lg hover-up">
+                            <img src="/api/placeholder/600/400" alt="Event Gallery" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                                <p class="text-white text-lg font-semibold">Poetry Slam 2024</p>
+                            </div>
+                        </div>
+
+                        <!-- Gallery Item 3 -->
+                        <div class="relative rounded-xl overflow-hidden shadow-lg hover-up">
+                            <img src="/api/placeholder/600/400" alt="Event Gallery" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                                <p class="text-white text-lg font-semibold">Memoir Workshop 2024</p>
+                            </div>
+                        </div>
+
+                        <!-- Gallery Item 4 -->
+                        <div class="relative rounded-xl overflow-hidden shadow-lg hover-up">
+                            <img src="/api/placeholder/600/400" alt="Event Gallery" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                                <p class="text-white text-lg font-semibold">Publishing Webinar 2024</p>
+                            </div>
+                        </div>
+
+                        <!-- Gallery Item 5 -->
+                        <div class="relative rounded-xl overflow-hidden shadow-lg hover-up">
+                            <img src="/api/placeholder/600/400" alt="Event Gallery" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                                <p class="text-white text-lg font-semibold">Character Development Workshop</p>
+                            </div>
+                        </div>
+
+                        <!-- Gallery Item 6 -->
+                        <div class="relative rounded-xl overflow-hidden shadow-lg hover-up">
+                            <img src="/api/placeholder/600/400" alt="Event Gallery" class="w-full h-64 object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                                <p class="text-white text-lg font-semibold">Writer's Meetup 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="#" class="btn-primary inline-flex items-center">
+                    View More Highlights
+                    <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Your Event Section -->
+    <div class="bg-white py-16" id="submit">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-base font-semibold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">Get Involved</h2>
+                <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">Submit Your Event</p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Have an event or competition idea? Share it with us and let's make it happen together!</p>
+            </div>
+
+            <div class="mt-12 bg-gray-50 rounded-xl shadow-lg p-8">
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <div>
+                            <label for="event-name" class="block text-sm font-medium text-gray-700">Event Name</label>
+                            <input type="text" name="event-name" id="event-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Enter event name">
+                        </div>
+                        <div>
+                            <label for="event-type" class="block text-sm font-medium text-gray-700">Event Type</label>
+                            <select id="event-type" name="event-type" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <option value="workshop">Workshop</option>
+                                <option value="webinar">Webinar</option>
+                                <option value="contest">Contest</option>
+                                <option value="meetup">Meetup</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="event-description" class="block text-sm font-medium text-gray-700">Event Description</label>
+                        <textarea id="event-description" name="event-description" rows="4" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Provide a brief description of your event"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <div>
+                            <label for="event-date" class="block text-sm font-medium text-gray-700">Event Date</label>
+                            <input type="date" name="event-date" id="event-date" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        </div>
+                        <div>
+                            <label for="event-time" class="block text-sm font-medium text-gray-700">Event Time</label>
+                            <input type="time" name="event-time" id="event-time" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="organizer-name" class="block text-sm font-medium text-gray-700">Organizer Name</label>
+                        <input type="text" name="organizer-name" id="organizer-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Your name or organization">
+                    </div>
+
+                    <div>
+                        <label for="organizer-email" class="block text-sm font-medium text-gray-700">Organizer Email</label>
+                        <input type="email" name="organizer-email" id="organizer-email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Your email address">
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn-primary inline-flex items-center">
+                            Submit Event
+                            <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+                <div class="space-y-4">
+                    <h3 class="text-sm font-semibold text-gray-500 tracking-wider uppercase">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Our Mission</a></li>
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Team</a></li>
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Careers</a></li>
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Press</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-sm font-semibold text-gray-500 tracking-wider uppercase">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Blog</a></li>
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Guides</a></li>
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Webinars</a></li>
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-sm font-semibold text-gray-500 tracking-wider uppercase">Community</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Forums</a></li>
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Events</a></li>
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Partners</a></li>
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Support</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-sm font-semibold text-gray-500 tracking-wider uppercase">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Privacy Policy</a></li>
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Terms of Service</a></li>
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Cookie Policy</a></li>
+                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-200 pt-8">
+                <div class="flex justify-between items-center">
+                    <p class="text-base text-gray-400">&copy; 2023 Osomapti. All rights reserved.</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <span class="sr-only">Twitter</span>
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <span class="sr-only">Facebook</span>
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <span class="sr-only">Instagram</span>
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <span class="sr-only">LinkedIn</span>
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
