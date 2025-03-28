@@ -3,602 +3,607 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Osomapti | Endless Learning Journey</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Osomapti - Your Infinite Learning Journey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        /* Navigation Styles (from previous optimization) */
+        nav {
+            background-color: rgba(255,255,255,0.98);
+            padding: 0.8rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* [Previous navigation styles remain unchanged...] */
+        
+        /* New Content Styles */
+        :root {
+            --primary: #3a5a78;
+            --secondary: #0d3b66;
+            --accent: #5ab9ea;
+            --highlight: #ffd166;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
         
         body {
             font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            line-height: 1.7;
+            background-color: #f5f7fa;
         }
         
-        .gradient-bg {
-            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #C026D3 100%);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(58,90,120,0.9), rgba(13,59,102,0.9)), 
+                        url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+        
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+            gap: 1.5rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Featured Content */
+        .featured {
+            margin: 4rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
             position: relative;
-            overflow: hidden;
+            display: inline-block;
         }
         
-        .gradient-bg::before {
+        .section-header h2::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('/api/placeholder/1920/1080') center/cover no-repeat;
-            opacity: 0.1;
-            z-index: 0;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--highlight), var(--accent));
         }
         
-        .gradient-overlay {
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-category {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--secondary);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(135deg, rgba(90,185,234,0.1), rgba(13,59,102,0.1));
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            color: rgba(90,185,234,0.2);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
             position: relative;
             z-index: 1;
         }
         
-        .hover-up {
-            transition: all 0.3s ease;
+        .testimonial-author {
+            display: flex;
+            align-items: center;
         }
         
-        .hover-up:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            margin-right: 1rem;
         }
         
-        .card-shadow {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        
-        .card-gradient {
-            background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
-        }
-        
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #4F46E5;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .active-nav::after {
-            width: 100%;
-        }
-        
-        .custom-shape-divider-bottom {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-        }
-        
-        .custom-shape-divider-bottom svg {
-            position: relative;
-            display: block;
-            width: calc(100% + 1.3px);
-            height: 70px;
-        }
-        
-        .custom-shape-divider-bottom .shape-fill {
-            fill: #FFFFFF;
-        }
-        
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(2, 200px);
-            gap: 1rem;
-        }
-        
-        .image-grid div:nth-child(1) {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-        
-        .tag {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background-color: rgba(79, 70, 229, 0.1);
-            color: #4F46E5;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .btn-primary {
-            background-color: #4F46E5;
+        /* Call to Action */
+        .cta-section {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 20px;
+            margin: 4rem 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .stat-item {
+                min-width: 150px;
+            }
+        }
+          /* Navbar specific styles */
+          nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+        }
+        
+        nav .logo a {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+        
+        .nav-menu li {
+            margin: 0 1rem;
+        }
+        
+        .nav-menu li a {
+            color: var(--dark);
+            text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
-            border: 2px solid #4F46E5;
+            transition: color 0.3s;
         }
         
-        .btn-primary:hover {
-            background-color: #4338CA;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+        .nav-menu li a:hover {
+            color: var(--accent);
         }
         
-        .btn-secondary {
-            background-color: transparent;
-            color: #4F46E5;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 2px solid #4F46E5;
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            color: white !important;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            transition: all 0.3s;
         }
         
-        .btn-secondary:hover {
-            background-color: rgba(79, 70, 229, 0.1);
-            transform: translateY(-2px);
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        /* Mobile styles */
+        @media (max-width: 992px) {
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1001;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                padding: 80px 0 30px;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: right 0.3s ease;
+                z-index: 1000;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li {
+                margin: 1rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .cta-item {
+                margin-top: 2rem !important;
+            }
         }
     </style>
 </head>
-<body class="antialiased text-gray-900 bg-gray-50">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20">
-                <div class="flex">
-                    <div class="flex-shrink-0 flex items-center">
-                        <span class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">Osomapti</span>
-                    </div>
-                    <div class="hidden sm:ml-10 sm:flex sm:space-x-8">
-                        <a href="/index.html" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Home</a>
-                        <a href="/nav/about.html" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">About</a>
-                        <a href="/nav/content.html" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Content</a>
-                        <a href="/nav/events.html" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Events</a>
-                        <a href="/nav/community.html" class="nav-link border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Community</a>
-                    </div>
-                </div>
-                <div class="hidden sm:ml-6 sm:flex sm:items-center">
-                    <button class="btn-secondary mr-4">Login</button>
-                    <button class="btn-primary">Sign Up Free</button>
-                </div>
-                <div class="-mr-2 flex items-center sm:hidden">
-                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
+<body>
+    <!-- Optimized Navigation -->
+    <nav>
+        <div class="logo">
+            <a href="#">Osomapti</a>
         </div>
+        
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-newspaper"></i> Articles</a></li>
+            <li><a href="#"><i class="fas fa-blog"></i> Blogs</a></li>
+            <li><a href="#"><i class="fas fa-lightbulb"></i> Skills</a></li>
+            <li><a href="#"><i class="fas fa-calendar-alt"></i> Events</a></li>
+            <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+            <li class="cta-item"><a href="#" class="cta-button"><i class="fas fa-user-plus"></i> Join Now</a></li>
+        </ul>
     </nav>
 
     <!-- Hero Section -->
-    <div class="gradient-bg relative">
-        <div class="max-w-7xl mx-auto py-20 px-4 sm:py-32 sm:px-6 lg:px-8 gradient-overlay">
-            <div class="lg:grid lg:grid-cols-12 lg:gap-8">
-                <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
-                    <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl sm:tracking-tight md:text-6xl">
-                        <span class="block">Discover the </span>
-                        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-green-200 to-green-300">Endless Journey</span>
-                        <span class="block">of Learning</span>
-                    </h1>
-                    <p class="mt-6 text-xl text-indigo-100 leading-relaxed">Osomapti is where curiosity meets knowledge. Find articles, essays, blogs, and skill-improving tips all in one place. Join our vibrant community of learners today.</p>
-                    <div class="mt-10 sm:flex sm:justify-center lg:justify-start">
-                        <div class="rounded-md shadow">
-                            <a href="#" class="btn-primary inline-flex items-center text-base">
-                                Start Exploring
-                                <svg class="ml-3 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </div>
-                        <div class="mt-3 sm:mt-0 sm:ml-3">
-                            <a href="#" class="btn-secondary inline-flex items-center text-base">
-                                Learn More
-                            </a>
-                        </div>
-                    </div>
-                    <div class="mt-8">
-                        <span class="inline-flex items-center text-sm font-medium text-indigo-100">
-                            <span class="flex items-center">
-                                <span class="inline-block h-3 w-3 rounded-full bg-green-400 pulse mr-2"></span>
-                                <span>Over 10,000 active members</span>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-                <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
-                    <div class="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md floating">
-                        <div class="relative block w-full bg-white rounded-lg overflow-hidden">
-                            <img src="/api/placeholder/600/400" alt="Osomapti Dashboard Preview" class="w-full">
-                            <div class="absolute inset-0 w-full h-full flex items-center justify-center">
-                                <svg class="h-20 w-20 text-indigo-500" fill="currentColor" viewBox="0 0 84 84">
-                                    <circle opacity="0.9" cx="42" cy="42" r="42" fill="white"></circle>
-                                    <path d="M55 42L35 55V29L55 42Z" fill="currentColor"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section class="hero">
+        <div class="container">
+            <h1>Expand Your Knowledge Without Limits</h1>
+            <p>Discover endless learning opportunities with Osomapti's curated collection of articles, courses, and resources designed to fuel your intellectual growth.</p>
+            <a href="#" class="cta-button" style="font-size: 1.1rem; padding: 0.8rem 2rem;">
+                <i class="fas fa-rocket"></i> Start Learning
+            </a>
         </div>
-        <div class="custom-shape-divider-bottom">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
-            </svg>
-        </div>
-    </div>
+    </section>
 
     <!-- Stats Section -->
-    <div class="bg-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 gap-5 sm:grid-cols-4">
-                <div class="bg-gray-50 overflow-hidden rounded-lg text-center p-5 hover-up">
-                    <p class="text-3xl font-extrabold text-indigo-600">10K+</p>
-                    <p class="mt-1 text-sm font-medium text-gray-500">Active Users</p>
-                </div>
-                <div class="bg-gray-50 overflow-hidden rounded-lg text-center p-5 hover-up">
-                    <p class="text-3xl font-extrabold text-indigo-600">5K+</p>
-                    <p class="mt-1 text-sm font-medium text-gray-500">Articles Published</p>
-                </div>
-                <div class="bg-gray-50 overflow-hidden rounded-lg text-center p-5 hover-up">
-                    <p class="text-3xl font-extrabold text-indigo-600">500+</p>
-                    <p class="mt-1 text-sm font-medium text-gray-500">Events Hosted</p>
-                </div>
-                <div class="bg-gray-50 overflow-hidden rounded-lg text-center p-5 hover-up">
-                    <p class="text-3xl font-extrabold text-indigo-600">25+</p>
-                    <p class="mt-1 text-sm font-medium text-gray-500">Countries Reached</p>
-                </div>
+    <div class="container">
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">10K+</div>
+                <div>Articles Published</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div>Expert Contributors</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50K+</div>
+                <div>Active Learners</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100+</div>
+                <div>Learning Paths</div>
             </div>
         </div>
     </div>
 
-    <!-- Features Section -->
-    <div class="py-16 bg-white overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-base font-semibold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">Features</h2>
-                <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">Why Choose Osomapti?</p>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">A one-stop destination for anyone who wants to tap into knowledge and unlock its treasures.</p>
+    <!-- Featured Articles -->
+    <section class="featured container">
+        <div class="section-header">
+            <h2>Featured Articles</h2>
+            <p>Discover our most popular and impactful learning resources</p>
+        </div>
+        
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="card-body">
+                    <span class="card-category">Technology</span>
+                    <h3 class="card-title">The Future of AI in Everyday Life</h3>
+                    <p>Explore how artificial intelligence is transforming our daily routines and what to expect in the coming years.</p>
+                    <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.9rem;">Read More</a>
+                </div>
             </div>
+            
+            <div class="content-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="card-body">
+                    <span class="card-category">Business</span>
+                    <h3 class="card-title">Effective Remote Team Management</h3>
+                    <p>Learn proven strategies to lead distributed teams successfully in the new era of remote work.</p>
+                    <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.9rem;">Read More</a>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="card-body">
+                    <span class="card-category">Personal Growth</span>
+                    <h3 class="card-title">Mastering the Art of Productivity</h3>
+                    <p>Discover science-backed techniques to maximize your efficiency without burning out.</p>
+                    <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.9rem;">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div class="mt-16">
-                <div class="lg:grid lg:grid-cols-3 lg:gap-8">
-                    <div class="relative">
-                        <div class="relative h-80 bg-indigo-600 rounded-2xl overflow-hidden shadow-xl transform transition-all hover:scale-105">
-                            <img src="/api/placeholder/600/400" alt="Diverse Content" class="w-full h-full object-cover opacity-20">
-                            <div class="absolute inset-0 flex items-center justify-center px-8 py-10">
-                                <div class="text-center">
-                                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-white mx-auto">
-                                        <i class="fas fa-book text-indigo-600 text-2xl"></i>
-                                    </div>
-                                    <h3 class="mt-6 text-2xl font-bold text-white">Diverse Content</h3>
-                                    <p class="mt-4 text-base text-indigo-100">From articles and essays to blogs and skill-improving tips, find practically everything in one place.</p>
-                                </div>
-                            </div>
-                        </div>
+    <!-- Learning Paths -->
+    <section class="featured container">
+        <div class="section-header">
+            <h2>Popular Learning Paths</h2>
+            <p>Structured journeys to master new skills and knowledge areas</p>
+        </div>
+        
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="card-body">
+                    <span class="card-category">Programming</span>
+                    <h3 class="card-title">Full-Stack Web Development</h3>
+                    <p>From HTML basics to advanced React and Node.js applications - become a professional web developer.</p>
+                    <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                        <span><i class="fas fa-book-open" style="color: var(--accent);"></i> 12 Modules</span>
+                        <span><i class="fas fa-clock" style="color: var(--accent);"></i> 45 Hours</span>
                     </div>
-
-                    <div class="mt-10 lg:mt-0">
-                        <div class="relative h-80 bg-purple-600 rounded-2xl overflow-hidden shadow-xl transform transition-all hover:scale-105">
-                            <img src="/api/placeholder/600/400" alt="Vibrant Community" class="w-full h-full object-cover opacity-20">
-                            <div class="absolute inset-0 flex items-center justify-center px-8 py-10">
-                                <div class="text-center">
-                                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-white mx-auto">
-                                        <i class="fas fa-users text-purple-600 text-2xl"></i>
-                                    </div>
-                                    <h3 class="mt-6 text-2xl font-bold text-white">Vibrant Community</h3>
-                                    <p class="mt-4 text-base text-purple-100">Connect with like-minded individuals, share ideas, and grow together in our energetic community of learners.</p>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="card-body">
+                    <span class="card-category">Data Science</span>
+                    <h3 class="card-title">Data Analysis with Python</h3>
+                    <p>Learn to extract insights from data using Pandas, NumPy, and visualization libraries.</p>
+                    <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                        <span><i class="fas fa-book-open" style="color: var(--accent);"></i> 8 Modules</span>
+                        <span><i class="fas fa-clock" style="color: var(--accent);"></i> 30 Hours</span>
                     </div>
-
-                    <div class="mt-10 lg:mt-0">
-                        <div class="relative h-80 bg-pink-600 rounded-2xl overflow-hidden shadow-xl transform transition-all hover:scale-105">
-                            <img src="/api/placeholder/600/400" alt="Events & Competitions" class="w-full h-full object-cover opacity-20">
-                            <div class="absolute inset-0 flex items-center justify-center px-8 py-10">
-                                <div class="text-center">
-                                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-white mx-auto">
-                                        <i class="fas fa-trophy text-pink-600 text-2xl"></i>
-                                    </div>
-                                    <h3 class="mt-6 text-2xl font-bold text-white">Events & Competitions</h3>
-                                    <p class="mt-4 text-base text-pink-100">Participate in writing contests and other events to showcase your talent and enhance your skills.</p>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="card-body">
+                    <span class="card-category">Design</span>
+                    <h3 class="card-title">UX/UI Design Fundamentals</h3>
+                    <p>Master user-centered design principles and create intuitive digital experiences.</p>
+                    <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                        <span><i class="fas fa-book-open" style="color: var(--accent);"></i> 10 Modules</span>
+                        <span><i class="fas fa-clock" style="color: var(--accent);"></i> 35 Hours</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Content Preview -->
-    <div class="bg-gray-50 py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-base font-semibold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">Content Categories</h2>
-                <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">Discover Knowledge</p>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Dive into a vast array of categories designed to spark curiosity and continuous learning.</p>
-            </div>
-
-            <div class="mt-16 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-                <div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover-up">
-                    <div class="relative w-full h-60 bg-gray-200 group-hover:opacity-75">
-                        <img src="/api/placeholder/600/400" alt="Articles" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500">
-                                <i class="fas fa-newspaper text-white"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900">Articles</h3>
-                        </div>
-                        <p class="mt-4 text-base text-gray-500">In-depth analysis and research on various subjects to expand your knowledge.</p>
-                        <div class="mt-6">
-                            <span class="tag">Science</span>
-                            <span class="tag">Technology</span>
-                            <span class="tag">Business</span>
-                        </div>
-                        <div class="mt-6">
-                            <a href="#" class="text-base font-medium text-indigo-600 hover:text-indigo-500">
-                                Browse Articles <span aria-hidden="true">&rarr;</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover-up">
-                    <div class="relative w-full h-60 bg-gray-200 group-hover:opacity-75">
-                        <img src="/api/placeholder/600/400" alt="Essays" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex items-center justify-center h-10 w-10 rounded-md bg-purple-500">
-                                <i class="fas fa-feather-alt text-white"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900">Essays</h3>
-                        </div>
-                        <p class="mt-4 text-base text-gray-500">Thought-provoking essays that challenge perspectives and inspire new ideas.</p>
-                        <div class="mt-6">
-                            <span class="tag">Philosophy</span>
-                            <span class="tag">Culture</span>
-                            <span class="tag">Society</span>
-                        </div>
-                        <div class="mt-6">
-                            <a href="#" class="text-base font-medium text-indigo-600 hover:text-indigo-500">
-                                Browse Essays <span aria-hidden="true">&rarr;</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover-up">
-                    <div class="relative w-full h-60 bg-gray-200 group-hover:opacity-75">
-                        <img src="/api/placeholder/600/400" alt="Blogs" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex items-center justify-center h-10 w-10 rounded-md bg-pink-500">
-                                <i class="fas fa-blog text-white"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900">Blogs</h3>
-                        </div>
-                        <p class="mt-4 text-base text-gray-500">Personal insights and experiences shared by our community of writers.</p>
-                        <div class="mt-6">
-                            <span class="tag">Personal</span>
-                            <span class="tag">Lifestyle</span>
-                            <span class="tag">Travel</span>
-                        </div>
-                        <div class="mt-6">
-                            <a href="#" class="text-base font-medium text-indigo-600 hover:text-indigo-500">
-                                Browse Blogs <span aria-hidden="true">&rarr;</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-12 text-center">
-                <a href="#" class="btn-primary inline-flex items-center">
-                    View All Categories
-                    <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </div>
+    </section>
 
     <!-- Testimonials -->
-    <div class="bg-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-base font-semibold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">Testimonials</h2>
-                <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">What Our Community Says</p>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Hear from our community of writers and learners about their experience with Osomapti.</p>
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Learners Say</h2>
+                <p>Join thousands of satisfied learners who transformed their knowledge with Osomapti</p>
             </div>
-
-            <div class="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-3">
-                <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover-up">
-                    <div class="flex items-center">
-                        <img class="h-12 w-12 rounded-full" src="/api/placeholder/100/100" alt="User">
-                        <div class="ml-4">
-                            <h4 class="text-lg font-bold text-gray-900">USER 1</h4>
-                            <p class="text-sm text-gray-500">Writer & Editor</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Osomapti completely changed my approach to learning. The quality of content is exceptional, and I've been able to advance my career significantly thanks to their resources.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
+                        <div>
+                            <strong>Sarah Johnson</strong>
+                            <div>Senior Developer</div>
                         </div>
-                    </div>
-                    <p class="mt-4 text-gray-600">"Osomapti has transformed how I approach my writing. The community feedback and resources are invaluable. I've improved significantly since joining."</p>
-                    <div class="mt-4 flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
                     </div>
                 </div>
-
-                <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover-up">
-                    <div class="flex items-center">
-                        <img class="h-12 w-12 rounded-full" src="/api/placeholder/100/100" alt="User">
-                        <div class="ml-4">
-                            <h4 class="text-lg font-bold text-gray-900">USER 2</h4>
-                            <p class="text-sm text-gray-500">Student</p>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">As a busy professional, I appreciate how Osomapti breaks down complex topics into digestible pieces. I've learned more here in 3 months than in years of formal education.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                        <div>
+                            <strong>Michael Chen</strong>
+                            <div>Product Manager</div>
                         </div>
-                    </div>
-                    <p class="mt-4 text-gray-600">"As a student, I've found Osomapti to be an incredible resource for expanding my knowledge beyond textbooks. The diverse content keeps me engaged and curious."</p>
-                    <div class="mt-4 flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
                     </div>
                 </div>
-
-                <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover-up">
-                    <div class="flex items-center">
-                        <img class="h-12 w-12 rounded-full" src="/api/placeholder/100/100" alt="User">
-                        <div class="ml-4">
-                            <h4 class="text-lg font-bold text-gray-900">USER 3</h4>
-                            <p class="text-sm text-gray-500">Content Creator</p>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The community aspect sets Osomapti apart. Being able to discuss articles with other learners and experts has deepened my understanding tremendously.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/68.jpg');"></div>
+                        <div>
+                            <strong>Emma Rodriguez</strong>
+                            <div>UX Designer</div>
                         </div>
-                    </div>
-                    <p class="mt-4 text-gray-600">"The writing contests on Osomapti pushed me to refine my skills and think outside the box. I've connected with amazing writers from around the world."</p>
-                    <div class="mt-4 flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Newsletter Section -->
-    <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="relative bg-white rounded-2xl shadow-xl overflow-hidden">
-                <div class="lg:grid lg:grid-cols-2 lg:gap-8">
-                    <div class="px-6 py-12 sm:px-12 lg:py-16">
-                        <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Stay Updated</h2>
-                        <p class="mt-4 text-lg text-gray-600">Subscribe to our newsletter to get the latest updates, articles, and event announcements directly in your inbox.</p>
-                        <form class="mt-8 sm:flex">
-                            <label for="email" class="sr-only">Email address</label>
-                            <input id="email" name="email" type="email" autocomplete="email" required class="w-full px-5 py-3 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs" placeholder="Enter your email">
-                            <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                                <button type="submit" class="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    Subscribe
-                                </button>
-                            </div>
-                        </form>
-                        <p class="mt-3 text-sm text-gray-500">We respect your privacy. Unsubscribe at any time.</p>
-                    </div>
-                    <div class="hidden lg:block">
-                        <img src="/api/placeholder/600/400" alt="Newsletter" class="w-full h-full object-cover">
-                    </div>
-                </div>
-            </div>
+    <!-- Call to Action -->
+    <section class="container">
+        <div class="cta-section">
+            <h2>Ready to Begin Your Learning Journey?</h2>
+            <p>Join Osomapti today and get unlimited access to all our resources and community features.</p>
+            <a href="#" class="cta-button" style="font-size: 1.1rem; padding: 0.8rem 2rem; display: inline-block; margin-top: 1rem;">
+                <i class="fas fa-user-plus"></i> Create Free Account
+            </a>
         </div>
-    </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-white">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
-                <div class="space-y-4">
-                    <h3 class="text-sm font-semibold text-gray-500 tracking-wider uppercase">About</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Our Mission</a></li>
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Team</a></li>
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Careers</a></li>
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Press</a></li>
-                    </ul>
-                </div>
-                <div class="space-y-4">
-                    <h3 class="text-sm font-semibold text-gray-500 tracking-wider uppercase">Resources</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Blog</a></li>
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Guides</a></li>
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Webinars</a></li>
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">FAQs</a></li>
-                    </ul>
-                </div>
-                <div class="space-y-4">
-                    <h3 class="text-sm font-semibold text-gray-500 tracking-wider uppercase">Community</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Forums</a></li>
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Events</a></li>
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Partners</a></li>
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Support</a></li>
-                    </ul>
-                </div>
-                <div class="space-y-4">
-                    <h3 class="text-sm font-semibold text-gray-500 tracking-wider uppercase">Legal</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Privacy Policy</a></li>
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Terms of Service</a></li>
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Cookie Policy</a></li>
-                        <li><a href="#" class="text-base text-gray-500 hover:text-gray-900">Disclaimer</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-12 border-t border-gray-200 pt-8">
-                <div class="flex justify-between items-center">
-                    <p class="text-base text-gray-400">&copy; 2023 Osomapti. All rights reserved.</p>
-                    <div class="flex space-x-6">
-                        <a href="#" class="text-gray-400 hover:text-gray-500">
-                            <span class="sr-only">Twitter</span>
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-gray-500">
-                            <span class="sr-only">Facebook</span>
-                            <i class="fab fa-facebook text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-gray-500">
-                            <span class="sr-only">Instagram</span>
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-gray-500">
-                            <span class="sr-only">LinkedIn</span>
-                            <i class="fab fa-linkedin text-xl"></i>
-                        </a>
-                    </div>
-                </div>
+    <footer>
+        <div class="container">
+            <!-- Footer content from previous implementation -->
+            <div style="text-align: center; padding-top: 2rem;">
+                <p>&copy; 2023 Osomapti. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Mobile menu toggle (from previous implementation)
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (window.innerWidth <= 992) {
+                    navMenu.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
